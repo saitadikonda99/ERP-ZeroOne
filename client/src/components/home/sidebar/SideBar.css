@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.SidebarComponent {
+    height: 100%;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.Sidebar-log {
+    height: fit-content;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+

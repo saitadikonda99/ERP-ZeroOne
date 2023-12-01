@@ -1,26 +1,87 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useLocation, Navigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import useAuth from '../../hooks/UseAuth'
+import './Login.css'
 
 function Login() {
-    const [userData, setUserData] = useState({})
+    const { auth, setAuth } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from || "/";
 
-    const handleChange = (e) => {
-        setUserData({
-            ...userData,
-            [e.target.name]: e.target.value
-        })
-    }
+    const [formData, setFormData] = useState({
+        username: '',
+        password: '',
+      });
+
+    const [error, setError] = useState(null);
+
+   // Handle input changes
+   const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+        ...formData,
+        [name]: value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+            const response = await axios.post('http://localhost:3001/login',
+              JSON.stringify(formData),
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+              }
+            );
+
+
+            const accessToken = response?.data?.accessToken;
+            const refreshToken = response?.data?.refreshToken;
+            const role = response?.data?.role;
+            const user = response?.data?.username;
+            
+            // set the auth state
+            setAuth({
+                accessToken,
+                refreshToken,
+                role,
+                user,
+            });
+
+           
+            // print the auth data to the console
+            console.log('auth data: ', auth);
+            navigate(from, { replace: true });
+        } catch (error) { 
+            console.log(error);
+            setError(error.message);
+        }
+    };
+
+
+
 
   return (
     <div className="LoginComponent">
         <div className="LoginComponent-in">
-            <form>
+            <div className="LoginComponent-logo">
+                <h2>ZeroOne ERP</h2>
+            </div>
+            <form onSubmit={handleSubmit}>
                 <div className="LoginComponent-one">
                     <input 
                         type='text'
                         name='username'
                         placeholder='Username'
-                        value={userData.username}
-                        onChange={handleChange}                        
+                        value={formData.username}
+                        onChange={handleInputChange}                        
                     />
                 </div>
                 <div className="LoginComponent-two">
@@ -28,8 +89,8 @@ function Login() {
                         type='password'
                         name='password'
                         placeholder='Password'
-                        value={userData.password}
-                        onChange={handleChange}                        
+                        value={formData.password}
+                        onChange={handleInputChange}                        
                     />
                 </div>
                 <div className="LoginComponent-three">

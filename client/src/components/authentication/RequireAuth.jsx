@@ -9,7 +9,7 @@ const RequireAuth = ({ allowedRoles }) => {
     return (
         <>
              { auth?.role?.find(role => allowedRoles?.includes(role))
-               || (allowedRoles.includes(isLoggedIn)) ?(
+               || auth?.accessToken ?(
                 <Outlet />
             ) : (
                 <Navigate

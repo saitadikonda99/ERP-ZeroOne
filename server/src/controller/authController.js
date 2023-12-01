@@ -12,11 +12,14 @@ const authenticate = async (username, password) => {
              WHERE username = ?`,
              [username]
             )
-        
-        const hashedPassword = userData[0].password === password
-       
 
+        
+        if (userData.length > 0) {
+        const hashedPassword = userData[0].password === password
         return hashedPassword ? userData[0] : false
+        }
+
+        return false
 
     } catch (error) {
         throw new Error(error.message)
@@ -52,12 +55,13 @@ const handleLogin = async (req, res) => {
             { expiresIn: '1h', algorithm: 'HS256' }
             )
         
-        // store refresh token in database
-        await pool.query(
-            `INSERT INTO refresh_tokens (token, user_id)
-             VALUES (?, ?)`,
-             [refreshToken, authenticated.id]
-            )
+            // save the refresh token with current user in the database
+            await pool.query(`
+                UPDATE refresh_tokens
+                SET token = ?
+                WHERE user_id = ?`
+                 ,[ refreshToken, authenticated.id ]
+            );
         
         // set the cookie with the refresh token
         res.cookie('jwt', refreshToken, { httpOnly: true });

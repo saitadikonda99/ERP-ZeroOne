@@ -1,7 +1,7 @@
 -- Enterprise Resource Planning System
 
 -- Create a Database named erp
-CREATE DATABASE erp;
+CREATE DATABASE IF NOT EXISTS erp;
 
 -- Use erp database
 USE erp;
@@ -18,15 +18,15 @@ USE erp;
 -- user_achievements
 -- user_ticket_raise
 
-
 -- Create a table named users
 CREATE TABLE IF NOT EXISTS users (
     id INT(11) NOT NULL AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
+    academic_year INT(11) NOT NULL CHECK (academic_year >= 1 AND academic_year <= 4),
     password VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS refresh_tokens (
     token VARCHAR(255) NOT NULL,
     user_id INT(11) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -42,22 +42,23 @@ CREATE TABLE IF NOT EXISTS refresh_tokens (
 CREATE TABLE IF NOT EXISTS events (
     event_id INT(11) NOT NULL AUTO_INCREMENT,
     event_name VARCHAR(255) NOT NULL,
-    event_date DATE NOT NULL CHECK (event_date >= CURDATE()), 
-    event_time TIME NOT NULL CHECK (event_time >= '00:00:00' AND event_time <= '23:59:59'),  
+    event_date DATE NOT NULL,
+    academic_year_name VARCHAR(9) NOT NULL, 
+    academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
+    event_time TIME NOT NULL CHECK (event_time >= '00:00:00' AND event_time <= '23:59:59'),
     event_venue VARCHAR(255) NOT NULL,
     event_description VARCHAR(255) NOT NULL,
     event_org VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (event_id)
 );
-
 
 -- Create a table named registrations
 CREATE TABLE IF NOT EXISTS registrations (
     registration_id INT(11) NOT NULL AUTO_INCREMENT,
     event_id INT(11) NOT NULL,
     user_id INT(11) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (registration_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
@@ -66,22 +67,27 @@ CREATE TABLE IF NOT EXISTS registrations (
 -- Create a table named attendance
 CREATE TABLE IF NOT EXISTS attendance (
     attendance_id INT(11) NOT NULL AUTO_INCREMENT,
+    academic_year_name VARCHAR(9) NOT NULL, 
+    academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
     event_id INT(11) NOT NULL,
     user_id INT(11) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('present', 'absent') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (attendance_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Create a table named projects
 CREATE TABLE IF NOT EXISTS projects (
     project_id INT(11) NOT NULL AUTO_INCREMENT,
+    academic_year_name VARCHAR(9) NOT NULL, 
+    academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
     project_name VARCHAR(255) NOT NULL,
     project_description VARCHAR(255) NOT NULL,
     project_deadline DATE NOT NULL,
     project_status VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (project_id)
 );
 
@@ -90,20 +96,22 @@ CREATE TABLE IF NOT EXISTS project_members (
     project_member_id INT(11) NOT NULL AUTO_INCREMENT,
     project_id INT(11) NOT NULL,
     user_id INT(11) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (project_member_id),
     FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Create a table named assignments
 CREATE TABLE IF NOT EXISTS assignments (
     assignment_id INT(11) NOT NULL AUTO_INCREMENT,
+    academic_year_name VARCHAR(9) NOT NULL, 
+    academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
     assignment_name VARCHAR(255) NOT NULL,
     assignment_description VARCHAR(255) NOT NULL,
     assignment_deadline DATE NOT NULL,
     assignment_status VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (assignment_id)
 );
 
@@ -112,10 +120,12 @@ CREATE TABLE IF NOT EXISTS user_assignments (
     user_assignment_id INT(11) NOT NULL AUTO_INCREMENT,
     assignment_id INT(11) NOT NULL,
     user_id INT(11) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    academic_year_name VARCHAR(9) NOT NULL, 
+    academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (user_assignment_id),
     FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Create a table named user_achievements
@@ -124,7 +134,7 @@ CREATE TABLE IF NOT EXISTS user_achievements (
     user_id INT(11) NOT NULL,
     achievement_name VARCHAR(255) NOT NULL,
     achievement_description VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (user_achievement_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -135,7 +145,7 @@ CREATE TABLE IF NOT EXISTS user_ticket_raise (
     user_id INT(11) NOT NULL,
     ticket_name VARCHAR(255) NOT NULL,
     ticket_description VARCHAR(255) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (user_ticket_raise_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
