@@ -1,5 +1,5 @@
 const express = require('express')
-const { handleLogin } = require('../controller/authController')
+const { handleLogin } = require('../../controller/auth/authController')
 const router = express.Router()
 
 router.post('/', (req, res) =>{

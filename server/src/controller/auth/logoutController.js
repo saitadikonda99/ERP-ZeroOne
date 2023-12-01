@@ -1,4 +1,4 @@
-const { pool } = require('../config/db');
+const { pool } = require('../../config/db');
 
 const handleLogout = async (req, res) => {
     try {
@@ -11,12 +11,12 @@ const handleLogout = async (req, res) => {
         const refreshToken = cookies.jwt;
 
 // Clear the refresh token in the database (Assuming you have a field named 'refreshToken' in your users table)
-        await pool.query(`
-            UPDATE refresh_tokens
-            SET token = null
-            WHERE token = ?`,
-            [refreshToken]
-        );
+        // await pool.query(`
+        //     UPDATE refresh_tokens
+        //     SET token = null
+        //     WHERE token = ?`,
+        //     [refreshToken]
+        // );
 
         // Clear the cookie on the client side
         res.clearCookie('jwt', { httpOnly: true});

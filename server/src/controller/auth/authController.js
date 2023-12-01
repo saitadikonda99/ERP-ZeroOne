@@ -1,4 +1,4 @@
-const { pool } = require('../config/db')
+const { pool } = require('../../config/db')
 const jwt = require('jsonwebtoken')
 
 const authenticate = async (username, password) => {
@@ -15,12 +15,10 @@ const authenticate = async (username, password) => {
 
         
         if (userData.length > 0) {
-        const hashedPassword = userData[0].password === password
-        return hashedPassword ? userData[0] : false
-        }
-
+            const hashedPassword = userData[0].password === password
+            return hashedPassword ? userData[0] : false
+        } 
         return false
-
     } catch (error) {
         throw new Error(error.message)
     }
@@ -46,22 +44,25 @@ const handleLogin = async (req, res) => {
         const accessToken = jwt.sign(
             { username: authenticated.username, role : [roles[0][0].role], id: authenticated.id  },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '5m', algorithm: 'HS256' }
+            { expiresIn: '10s', algorithm: 'HS256' }
             )
         
         const refreshToken = jwt.sign(
             { username: authenticated.username, role : [roles[0][0].role], id: authenticated.id  },
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '1h', algorithm: 'HS256' }
+            { expiresIn: '5m', algorithm: 'HS256' }
             )
         
+            console.log('refreshToken: ', refreshToken)
+        
             // save the refresh token with current user in the database
-            await pool.query(`
-                UPDATE refresh_tokens
-                SET token = ?
-                WHERE user_id = ?`
-                 ,[ refreshToken, authenticated.id ]
-            );
+            // await pool.query(`
+            //     UPDATE users
+            //     SET token = ?
+            //     WHERE user_id = ?`
+            //      ,[ refreshToken, authenticated.id ]
+            // );
+
         
         // set the cookie with the refresh token
         res.cookie('jwt', refreshToken, { httpOnly: true });

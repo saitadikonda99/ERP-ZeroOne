@@ -4,12 +4,11 @@ import useAuth from '../../hooks/UseAuth'
 const RequireAuth = ({ allowedRoles }) => {
     const { auth } = useAuth()
     const location = useLocation()
-    const isLoggedIn = sessionStorage.getItem('role')
     
     return (
         <>
              { auth?.role?.find(role => allowedRoles?.includes(role))
-               || auth?.accessToken ?(
+               || auth?.role ?(
                 <Outlet />
             ) : (
                 <Navigate

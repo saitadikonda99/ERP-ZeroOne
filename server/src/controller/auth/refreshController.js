@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { pool } = require('../config/db');
+const { pool } = require('../../config/db');
 
 const refreshTokenHandler = async (refreshToken, res) => {
     try {
@@ -19,7 +19,7 @@ const refreshTokenHandler = async (refreshToken, res) => {
         jwt.sign(
             { username: decodedToken.username, id: decodedToken.id, role: decodedToken.role }, // Include any necessary properties
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '30m' },
+            { expiresIn: '10s' },
             (err, accessToken) => {
                 if (err) {
                     console.error('Error signing access token:', err);

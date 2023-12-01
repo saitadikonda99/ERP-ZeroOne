@@ -6,11 +6,9 @@ import Home from './pages/Home'
 import Login from './pages/Auth/Login'
 import Layout from './components/authentication/Layout'
 import RequireAuth from './components/authentication/RequireAuth'
-import useLogoutTimer from './components/authentication/Session'
 import PersistLogin from './components/authentication/PersistLogin'
 
 function App() {
-
   return (
      <div className="App">
       <Routes>

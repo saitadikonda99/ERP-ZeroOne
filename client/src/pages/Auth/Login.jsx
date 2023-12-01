@@ -41,30 +41,26 @@ function Login() {
               }
             );
 
-
             const accessToken = response?.data?.accessToken;
             const refreshToken = response?.data?.refreshToken;
             const role = response?.data?.role;
             const user = response?.data?.username;
+            const id = response?.data?.id;
             
             // set the auth state
             setAuth({
+                id,
                 accessToken,
                 refreshToken,
                 role,
                 user,
             });
 
-           
-            // print the auth data to the console
-            console.log('auth data: ', auth);
             navigate(from, { replace: true });
         } catch (error) { 
-            console.log(error);
-            setError(error.message);
+            setError(error?.response?.data?.message);
         }
     };
-
 
 
 
@@ -97,6 +93,9 @@ function Login() {
                     <button type='submit'>Login</button>
                 </div>
             </form>
+            <div className="LoginError">
+                {error && <p className="LoginComponent-error">{error}</p>}
+            </div>
         </div>
     </div>
   )

@@ -5,6 +5,7 @@ import SideBar from '../components/home/sidebar/SideBar'
 import './css/Home.css'
 import TopBar from '../components/home/topbar/TopBar'
 
+
 function Home() {
   return (
     <div className="HomeComponent">

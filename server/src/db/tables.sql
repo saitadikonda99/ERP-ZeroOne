@@ -23,20 +23,25 @@ CREATE TABLE IF NOT EXISTS users (
     id INT(11) NOT NULL AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    academic_year INT(11) NOT NULL CHECK (academic_year >= 1 AND academic_year <= 4),
     password VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
+    refresh_token VARCHAR(255),   
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
 
--- Create a table named refresh_tokens
-CREATE TABLE IF NOT EXISTS refresh_tokens (
-    token VARCHAR(255) NOT NULL,
+-- Create a table named user_academic_details
+CREATE TABLE IF NOT EXISTS user_academic_details (
+    uni_id INT(11) NOT NULL,
     user_id INT(11) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    academic_year INT(11) NOT NULL CHECK (academic_year >= 1 AND academic_year <= 4),
+    academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
+    branch VARCHAR(255),  -- Add the appropriate data type for the branch
+    PRIMARY KEY (uni_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+
 
 -- Create a table named events 
 CREATE TABLE IF NOT EXISTS events (
