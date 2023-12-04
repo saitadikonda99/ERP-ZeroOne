@@ -19,7 +19,6 @@
     "axios": "^1.6.2",
     "chart.js": "^4.4.0",
     "react": "^18.2.0",
-    "react-add-to-calendar": "^0.1.5",
     "react-chartjs-2": "^5.2.0",
     "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
