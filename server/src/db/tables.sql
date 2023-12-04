@@ -32,14 +32,22 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Create a table named user_academic_details
 CREATE TABLE IF NOT EXISTS user_academic_details (
-    uni_id INT(11) NOT NULL,
+    uni_id BIGINT NOT NULL,
     user_id INT(11) NOT NULL,
+    FullName VARCHAR(255) NOT NULL,
+    Division ENUM('trailbrazers', 'flacons', 'core' ) NOT NULL,
     academic_year INT(11) NOT NULL CHECK (academic_year >= 1 AND academic_year <= 4),
     academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
-    branch VARCHAR(255),  -- Add the appropriate data type for the branch
+    branch VARCHAR(255),  
+    profile_link VARCHAR(255) NOT NULL,
+    github_link VARCHAR(255),  -- GitHub link
+    gender ENUM('male', 'female'),  -- Gender
+    date_of_birth DATE,  -- Date of Birth
+    phnumber VARCHAR(20),  -- Phone number
     PRIMARY KEY (uni_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
 
 
 
@@ -54,20 +62,23 @@ CREATE TABLE IF NOT EXISTS events (
     event_venue VARCHAR(255) NOT NULL,
     event_description VARCHAR(255) NOT NULL,
     event_org VARCHAR(255) NOT NULL,
+    event_host VARCHAR(255) NOT NULL;
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (event_id)
 );
 
 -- Create a table named registrations
-CREATE TABLE IF NOT EXISTS registrations (
-    registration_id INT(11) NOT NULL AUTO_INCREMENT,
-    event_id INT(11) NOT NULL,
-    user_id INT(11) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CREATE TABLE registrations (
+    registration_id INT NOT NULL AUTO_INCREMENT,
+    event_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (registration_id),
-    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    UNIQUE KEY unique_registration (event_id, user_id),
+    FOREIGN KEY (event_id) REFERENCES events(event_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
 
 -- Create a table named attendance
 CREATE TABLE IF NOT EXISTS attendance (

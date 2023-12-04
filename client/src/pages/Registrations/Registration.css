@@ -1,0 +1,53 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.RegistrationsComponent {
+    height: 100vh;
+    width: 100%;
+}
+
+.RegistrationsComponent-in {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.RegistrationsComponent-one {
+    width: 25%;
+    height: 100vh;
+}
+
+.RegistrationsComponent-two {
+    width: 75%;
+    height: 100vh;
+    border: 2px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.RegistrationsComponent-view {
+    padding: 2rem;
+}
+
+.RegistrationsComponent-view table {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: rgb(225, 224, 231);
+}
+
+td:nth-child(1) {
+    background-color: rgb(225, 224, 231);
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 1rem;
+}

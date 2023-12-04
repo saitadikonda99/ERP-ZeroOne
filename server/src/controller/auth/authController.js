@@ -50,7 +50,7 @@ const handleLogin = async (req, res) => {
         const refreshToken = jwt.sign(
             { username: authenticated.username, role : [roles[0][0].role], id: authenticated.id  },
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '5m', algorithm: 'HS256' }
+            { expiresIn: '1d', algorithm: 'HS256' }
             )
         
             console.log('refreshToken: ', refreshToken)

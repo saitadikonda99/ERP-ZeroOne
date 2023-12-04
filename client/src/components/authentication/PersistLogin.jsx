@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import useAuth from '../../hooks/UseAuth'
 
 import useRefresh from '../../hooks/UseRefresh'
+import CircularProgress from '@mui/material/CircularProgress';
+import './Persist.css'
 
 
 const PersistLogin = () => {
@@ -27,8 +29,10 @@ const PersistLogin = () => {
     }, []);  
    
     if (loading) {
-        return <div>Loading...</div>;
-    }
+        return <div className='PeristLogin'>
+                    <CircularProgress />
+               </div>;
+             }
     return <Outlet />;
 }
 

@@ -1,12 +1,17 @@
 import { Routes, Route } from 'react-router-dom'
-import './App.css'
+
 
 // imports start here 
-import Home from './pages/Home'
+import Home from './pages/home/Home'
 import Login from './pages/Auth/Login'
 import Layout from './components/authentication/Layout'
 import RequireAuth from './components/authentication/RequireAuth'
 import PersistLogin from './components/authentication/PersistLogin'
+import Profile from './pages/profile/Profile'
+import Events from './pages/events/Events'
+import Registration from './pages/Registrations/Registration'
+import EventDes from './pages/events/EventDes'
+
 
 function App() {
   return (
@@ -16,9 +21,13 @@ function App() {
 
           {/* require admin authentication */}
           <Route element={<PersistLogin/>}>
-          <Route element={<RequireAuth allowedRoles={['Admin']}/>}>
-            <Route path="/" element={<Home />} />
-          </Route>
+            <Route element={<RequireAuth allowedRoles={['Admin']}/>}>
+              <Route path="/" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/Registration" element={<Registration />} />
+              <Route path="/EventDes/:id" element={<EventDes />} />
+            </Route>
           </Route>
 
           {/* public routes */}

@@ -14,6 +14,10 @@ const verifyRoles = require('./middleware/verifyRoles')
 const credentials = require('./middleware/credentials')
 const corsOptions = require('./config/corsOptions')
 const Profile = require('./routes/profileRoute')
+const Events = require('./routes/eventRoute')
+const EventRegister = require('./routes/eventRegister')
+const UserReg = require('./routes/UserReg')
+ 
 
 
 // cors 
@@ -37,6 +41,9 @@ app.use('/login', Login)
 app.use('/refresh', Refresh)
 app.use('/logout', Logout)
 app.use('/profile', verifyJWT, Profile)
+app.use('/events', verifyJWT ,Events)
+app.use('/eventRegister', verifyJWT, EventRegister)
+app.use('/UserReg', UserReg)
 
 
 app.listen(PORT, () => {
