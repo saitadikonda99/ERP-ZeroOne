@@ -6,7 +6,6 @@ import TopBar from '../../components/home/topbar/TopBar'
 import EventImg  from '../../assets/EventImg.jpeg'
 import useAuth from '../../hooks/UseAuth'
 import axiosPrivate from '../../hooks/UseAxiosPrivate'
-import AddToCalendar from 'react-add-to-calendar';
 import '../css/Home.css'
 import './EventDes.css'
 
