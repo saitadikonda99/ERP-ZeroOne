@@ -33,10 +33,21 @@
     gap: 1rem;
 }
 
-.LoginComponent-one, .LoginComponent-two, .LoginComponent-three {
+.LoginComponent-one, .LoginComponent-two {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.LoginComponent-three  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.LoginComponent-three a {
+    text-decoration: none;
 }
 
 .LoginComponent input {
@@ -47,7 +58,7 @@
     border-radius: 5px;
 }
 
-.LoginComponent-three button {
+.Login-button {
     width: 80%;
     padding: .8rem;
     color: white;
@@ -57,7 +68,7 @@
     font-size: 1rem;
 }
 
-.LoginComponent-three button:hover {
+.Login-button:hover {
     background-color: black;
     scale: 1.1;
 }

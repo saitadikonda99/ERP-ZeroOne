@@ -11,6 +11,8 @@ import Profile from './pages/profile/Profile'
 import Events from './pages/events/Events'
 import Registration from './pages/Registrations/Registration'
 import EventDes from './pages/events/EventDes'
+import Forgot from './pages/Auth/Forgot'
+import Reset from './pages/Auth/Reset'
 
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
 
           {/* public routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/reset/:id" element={<Reset />} />
 
         </Route>
       </Routes>

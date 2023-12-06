@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './SideBar.css'
 import useLogout from '../../../hooks/UseLogout'
 import { useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 // import icons here 
@@ -16,12 +17,12 @@ import { LuSquareCode } from "react-icons/lu";
 import { GrAchievement } from "react-icons/gr";
 import { ImTicket } from "react-icons/im";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function SideBar() {
 
     const logout = useLogout()
-    const [path, setPath] = useState('')
 
     const location = useLocation();
     const pathSegments = location.pathname.split('/');

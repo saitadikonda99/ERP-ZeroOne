@@ -17,7 +17,8 @@ const Profile = require('./routes/profileRoute')
 const Events = require('./routes/eventRoute')
 const EventRegister = require('./routes/eventRegister')
 const UserReg = require('./routes/UserReg')
- 
+const Forgot = require('/Volumes/Sai-Env/ERP-ZeroOne/server/src/routes/auth/forgotRoute.js')
+const Reset = require('/Volumes/Sai-Env/ERP-ZeroOne/server/src/routes/auth/resetRoute.js')
 
 
 // cors 
@@ -44,7 +45,8 @@ app.use('/profile', verifyJWT, Profile)
 app.use('/events', verifyJWT ,Events)
 app.use('/eventRegister', verifyJWT, EventRegister)
 app.use('/UserReg', UserReg)
-
+app.use('/forgot', Forgot)
+app.use('/reset', Reset)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

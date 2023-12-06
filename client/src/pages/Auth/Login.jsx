@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useLocation, Navigate, Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Link} from 'react-router-dom'
 import useAuth from '../../hooks/UseAuth'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Login.css'
 
 function Login() {
@@ -58,9 +59,29 @@ function Login() {
 
             navigate(from, { replace: true });
         } catch (error) { 
-            setError(error?.response?.data?.message);
+            setError(error?.message);
+        } finally {
+            setIsLoading(false);
         }
     };
+
+    const handleToast = () => {
+        error && toast.error('Login Failed', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+            });
+        !error && toast.success('Login Successful', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+            });
+    }
+
 
 
 
@@ -90,12 +111,11 @@ function Login() {
                     />
                 </div>
                 <div className="LoginComponent-three">
-                    <button type='submit'>Login</button>
+                    <button className='Login-button' type='submit' onClick={handleToast}>Login</button>
+                    <Link to='/forgot'>forgot password?</Link>
+                    <ToastContainer />
                 </div>
             </form>
-            <div className="LoginError">
-                {error && <p className="LoginComponent-error">{error}</p>}
-            </div>
         </div>
     </div>
   )
