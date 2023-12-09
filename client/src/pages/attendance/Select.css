@@ -1,0 +1,14 @@
+.SelectComponent-view {
+    width: 100%;
+    height: fit-content;
+    padding: 2rem;
+}
+
+.SelectComponent-view-in {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+}

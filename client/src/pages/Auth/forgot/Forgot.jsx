@@ -1,19 +1,22 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'
+import CryptoJS from 'react-native-crypto-js';
+
 import './Forgot.css'
 
 function Forgot() {
     const [formData, setFormData] = useState({ email: '' })
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
+        e.preventDefault()
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     const handlePassword = async (e) => {
-        e.preventDefault();
+
         try {
             console.log(formData)
             const response = await axios.post('http://localhost:3001/forgot',
@@ -25,10 +28,17 @@ function Forgot() {
                     withCredentials: true,
                 }
             );
-            toast.success(response.data.message)
+
+            console.log(response.status)
+           
+           if(response.status === 201) {
+            const encryptedEmail = CryptoJS.AES.encrypt(formData.email, 'sai' ).toString();
+             navigate(`/request/resend/${encryptedEmail}`)
+           }
+
         } catch (error) {
             console.log(error)
-            toast.error('Password reset failed')
+            alert('Use a valid email address')
         }
     }
 

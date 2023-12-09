@@ -29,6 +29,29 @@ function Registration() {
         fetchRegister();
     },[])
 
+    const handleButton = (eventId) => {
+      const confirm = window.confirm("Are you sure you want to unregister?")
+      if(confirm) {
+        handleUnregister(eventId)
+      } else {
+        return
+      }
+    }
+
+    const handleUnregister = async (eventId) => {
+      try {
+        const response = await axios.delete(`/unRegister/${eventId}/${auth?.id}`)
+         
+        if(response.status === 200) {
+          alert(response.data.message)
+          window.location.reload()
+        }
+      
+      } catch (error) {
+        console.log(error)
+        alert(error.message)
+      }
+    }
 
   return (
     <div className="HomeComponent">
@@ -43,7 +66,8 @@ function Registration() {
             </div>
           </div>
             <div className="RegistrationsComponent-view">
-                <h1></h1>
+              <div className="RegistrationsComponent-view-in">
+                <h1>{error?.message}</h1>
                 <table>
                     <thead>
                         <tr>
@@ -52,8 +76,8 @@ function Registration() {
                             <th>Event Time</th>
                             <th>Event Venue</th>
                             <th>Event Organization</th>
-                            <th>Event Time</th>
                             <th>Registration Date</th>
+                            <th>Unregister</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,15 +85,16 @@ function Registration() {
                         <tr key={index}>
                             <td>{++index}</td>
                             <td>{item.event_name}</td>
-                            <td>{item.event_date}</td>
                             <td>{item.event_time}</td>
                             <td>{item.event_venue}</td>
-                            <td>{item.event_time}</td>
-                            <td>{item.registration_data}</td>
+                            <td>{item.event_org}</td>
+                            <td>{item.registration_data.slice(0, 10)}</td>
+                            <td><button onClick={() => handleButton(item.event_id)} className='unregister-btn'>Unregister</button></td>
                         </tr>
                       ))}
                     </tbody>
                 </table>
+              </div>
             </div>
         </div>
       </div>

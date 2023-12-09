@@ -12,7 +12,6 @@ const useLogout = () => {
             const response = await axiosPrivate.get('/logout');
     
                 console.log(response.status);
-                sessionStorage.removeItem('role');
                 window.location.href = '/login';
    
     } catch (error) {

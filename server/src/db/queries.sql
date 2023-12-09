@@ -12,9 +12,7 @@ INSERT INTO users (username, email, password, role, refresh_token) VALUES
 
 -- user academic details
 INSERT INTO user_academic_details (uni_id, user_id, FullName, Division, academic_year, academic_sem, branch, profile_link, github_link, gender, date_of_birth, phnumber) VALUES
-(805, 1, 'Tadikonda Sai Manikanta', 'trailbrazers', 2, 'even', 'CSE', 'https://example.com/profile1', 'github.com/saitadikonda99', 'male', '2003-10-13', '9703177577'),
-(889, 2, 'deepak', 'trailbrazers', 3, 'even', 'Electrical Engineering', 'https://example.com/profile2', 'github.com', 'male', '2002-8-1', '12345654'),   
-(1219, 3, 'pavan', 'trailbrazers', 2, 'even', 'Mechanical Engineering', 'https://example.com/profile3', 'github.com', 'male', '2002-10-1', '12345654');  
+(2200030805, 5, 'Tadikonda Sai Manikanta', 'trailbrazers', 2, 'even', 'CSE', 'https://example.com/profile1', 'github.com/saitadikonda99', 'male', '2003-10-13', '9703177577')
 
 -- events
 

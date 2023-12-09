@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS user_academic_details (
 
 
 
-
 -- Create a table named events 
 CREATE TABLE IF NOT EXISTS events (
     event_id INT(11) NOT NULL AUTO_INCREMENT,
@@ -64,7 +63,7 @@ CREATE TABLE IF NOT EXISTS events (
     event_org VARCHAR(255) NOT NULL,
     event_host VARCHAR(255) NOT NULL;
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (event_id)
+    PRIMARY KEY (event_id),
 );
 
 -- Create a table named registrations
@@ -75,8 +74,8 @@ CREATE TABLE registrations (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (registration_id),
     UNIQUE KEY unique_registration (event_id, user_id),
-    FOREIGN KEY (event_id) REFERENCES events(event_id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 

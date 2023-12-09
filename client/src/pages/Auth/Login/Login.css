@@ -24,7 +24,6 @@
 
 .LoginComponent-in form {
     width: 30%;
-    border: 2px solid black;
     border-radius: 20px;
     height: fit-content;
     padding: 4rem 2rem;
@@ -38,39 +37,39 @@
     align-items: center;
     justify-content: center;
 }
-
-.LoginComponent-three  {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.LoginComponent-three a {
-    text-decoration: none;
-}
+ 
 
 .LoginComponent input {
-    width: 80%;
-    padding: .5rem;
+    width: 100%;
+    padding: 1rem;
     font-size: 1.2rem;
     border: 1px solid black;
     border-radius: 5px;
 }
 
 .Login-button {
-    width: 80%;
-    padding: .8rem;
+    width: 100%;
+    padding: 1rem;
     color: white;
-    background-color: black;
+    background-color: rgb(78, 161, 249);
     border: none;
     border-radius: 5px;
     font-size: 1rem;
 }
 
 .Login-button:hover {
-    background-color: black;
-    scale: 1.1;
+    background-color: blue;
+    color: white;
+}
+
+.LoginComponent-three {
+    text-align: left;
+    width: 100%;
+}
+
+.LoginComponent-three a {
+    text-decoration: none;
+    color: blue;
 }
 
 .LoginError {

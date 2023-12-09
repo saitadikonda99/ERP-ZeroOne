@@ -1,0 +1,45 @@
+.AttComponent-view {
+    padding: 2rem;
+    height: 87vh;
+    overflow: scroll;
+}
+
+.AttComponent-view-in {
+    height: fit-content;
+}
+
+.AttComponent-view {
+    width: 100%;
+    height: fit-content;
+}
+
+.AttComponent-view-in {
+    width: 100%;
+    height: fit-content;
+}
+
+.AttComponent-view-in table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.AttComponent-view-in td, th {
+    border: 1px solid black;
+}
+
+.AttComponent-view-in th {
+    background-color: rgb(225, 224, 231); 
+    padding: 1rem;
+}
+
+.AttComponent-view-in th:nth-child(1) {
+    padding: 0rem;
+    width: 10%;
+}
+
+.AttComponent-view-in td:nth-child(1) {
+    background-color: rgb(225, 224, 231);
+}
+
+

@@ -46,17 +46,16 @@ const handleForgot = async (req, res) => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.log(error)
-            } else {
-               res.status(200).send({
-                   forgot_success: 'Email sent'
-               })
-            }
+            }  
         })
 
-        res
+        res.status(201).send({
+            Email_status: 'Email sent'
+        })
+
     } catch (error) {
         res.status(400).send({
-            forgot_error: 'Email does not exist'
+            Email_status: 'Email does not exist'
         })
     }
 }

@@ -2,22 +2,25 @@ import React from 'react'
 
 // imports start here 
 import SideBar from '../../components/home/sidebar/SideBar'
+import AdminSidebar from '../../components/home/admin/sidebar/Sidebar'
 import '../css/Home.css'
 import './Home.css'
 import TopBar from '../../components/home/topbar/TopBar'
 import CountUp from 'react-countup';
 import Chart from './Chart'
+import useAuth from '../../hooks/UseAuth'
 
 
 // import icons here
 import { PiStudent } from "react-icons/pi";
 
 function Home() {
+    const { auth } = useAuth();
   return (
     <div className="HomeComponent">
       <div className="HomeComponent-in">
         <div className="HomeComponent-one">
-          <SideBar />
+          { auth.role == 'Admin' ? <AdminSidebar/> : <SideBar/> }
         </div>
         <div className="HomeComponent-two">
           <div className="HomeComponentTopBar">

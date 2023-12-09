@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate, Link} from 'react-router-dom'
-import useAuth from '../../hooks/UseAuth'
+import useAuth from '../../../hooks/UseAuth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css'
@@ -58,6 +58,7 @@ function Login() {
             });
 
             navigate(from, { replace: true });
+
         } catch (error) { 
             setError(error?.message);
         } finally {
@@ -86,6 +87,7 @@ function Login() {
 
 
   return (
+   
     <div className="LoginComponent">
         <div className="LoginComponent-in">
             <div className="LoginComponent-logo">
@@ -111,8 +113,10 @@ function Login() {
                     />
                 </div>
                 <div className="LoginComponent-three">
-                    <button className='Login-button' type='submit' onClick={handleToast}>Login</button>
                     <Link to='/forgot'>forgot password?</Link>
+                </div>
+                <div className="LoginComponent-four">
+                    <button className='Login-button' type='submit' onClick={handleToast}>Login</button>
                     <ToastContainer />
                 </div>
             </form>

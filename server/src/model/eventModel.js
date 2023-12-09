@@ -8,7 +8,6 @@ const handleEvent = async () => {
         )
         return eventData.length > 0 ? eventData : {error: "no data found"};
     } catch (error) {
-        console.log(error)
         return error;
     }
 }

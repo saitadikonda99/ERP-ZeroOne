@@ -2,16 +2,19 @@ import React from 'react'
 import './Topbar.css'
 import useProfile from '../../../hooks/UseProfile'
 import AccountMenu from './Notification'
+import useAuth from '../../../hooks/UseAuth'
 
 function TopBar() {
     const profile = useProfile()
+    const { auth } = useAuth();
+    const Role = auth?.role
 
   return (
         <div className="TopbarComponent">
             <div className="TopbarComponent-in">
                 <div className="Topbar-one">
                     <div className="Topbar-one-in-one">
-                        <p>Student Portal</p>
+                        <p>{Role} Portal</p>
                     </div>
                     <div className="Topbar-one-in-two">
                         <div className="Topbar-one-one">

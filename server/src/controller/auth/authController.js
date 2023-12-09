@@ -44,26 +44,25 @@ const handleLogin = async (req, res) => {
         const accessToken = jwt.sign(
             { username: authenticated.username, role : [roles[0][0].role], id: authenticated.id  },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '10s', algorithm: 'HS256' }
+            { expiresIn: '30s', algorithm: 'HS256' }
             )
         
         const refreshToken = jwt.sign(
             { username: authenticated.username, role : [roles[0][0].role], id: authenticated.id  },
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '1d', algorithm: 'HS256' }
+            { expiresIn: '30m', algorithm: 'HS256' }
             )
         
             console.log('refreshToken: ', refreshToken)
         
             // save the refresh token with current user in the database
-            // await pool.query(`
-            //     UPDATE users
-            //     SET token = ?
-            //     WHERE user_id = ?`
-            //      ,[ refreshToken, authenticated.id ]
-            // );
+            await pool.query(`
+                UPDATE users
+                SET refresh_token = ?
+                WHERE id = ?`
+                 ,[ refreshToken, authenticated.id ]
+            );
 
-        
         // set the cookie with the refresh token
         res.cookie('jwt', refreshToken, { httpOnly: true });
         res.json({ id: authenticated.id, username: authenticated.username, role: [roles[0][0].role], accessToken: accessToken })
