@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { handleEventRegister } = require('../model/eventRegister')
+const { handleEventRegister } = require('../model/eventRegModel')
 
 router.post('/:userId/:eventId', async (req, res) => {
     const userId = req.params.userId

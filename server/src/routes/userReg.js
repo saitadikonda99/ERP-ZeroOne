@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { handleEveReg } = require('../model/userReg')
+const { handleEveReg } = require('../model/userRegModel')
 
 router.get('/:userId', async (req, res) => {
     const userId = req.params.userId

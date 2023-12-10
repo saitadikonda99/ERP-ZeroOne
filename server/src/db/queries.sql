@@ -40,3 +40,21 @@ UPDATE events SET poster_link = 'https://events.linuxfoundation.org/wp-content/u
 UPDATE events SET poster_link = 'https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/212/720/thumb/Event_Background.png?1692811699'
 Where event_id > 5;
 
+
+
+-- CREATE TABLE IF NOT EXISTS attendance (
+--     attendance_id INT(11) NOT NULL AUTO_INCREMENT,
+--     academic_year_name VARCHAR(9) NOT NULL, 
+--     academic_sem VARCHAR(255) NOT NULL CHECK (academic_sem = 'odd' OR academic_sem = 'even'),
+--     event_id INT(11) NOT NULL,
+--     user_id INT(11) NOT NULL,
+--     status ENUM('present', 'absent') NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+--     PRIMARY KEY (attendance_id),
+--     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+-- );
+
+INSERT INTO attendance(academic_year_name, academic_sem, event_id, user_id, status,  ) values (
+    '2023-24','even', 5, 5, 'present'
+)

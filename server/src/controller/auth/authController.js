@@ -53,7 +53,6 @@ const handleLogin = async (req, res) => {
             { expiresIn: '30m', algorithm: 'HS256' }
             )
         
-            console.log('refreshToken: ', refreshToken)
         
             // save the refresh token with current user in the database
             await pool.query(`

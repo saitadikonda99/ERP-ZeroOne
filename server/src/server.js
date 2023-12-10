@@ -15,11 +15,12 @@ const credentials = require('./middleware/credentials')
 const corsOptions = require('./config/corsOptions')
 const Profile = require('./routes/profileRoute')
 const Events = require('./routes/eventRoute')
-const EventRegister = require('./routes/eventRegister')
+const EventRegister = require('./routes/eventRegRoute')
 const UserReg = require('./routes/UserReg')
 const Forgot = require('/Volumes/Sai-Env/ERP-ZeroOne/server/src/routes/auth/forgotRoute.js')
 const Reset = require('/Volumes/Sai-Env/ERP-ZeroOne/server/src/routes/auth/resetRoute.js')
 const UnRegister = require('./routes/unRegisterRoute')
+const getAttendace = require('./routes/getAttRoute')
 
 
 // cors 
@@ -51,6 +52,7 @@ app.use('/events', verifyJWT ,Events)
 app.use('/eventRegister', verifyJWT, EventRegister)
 app.use('/unRegister', verifyJWT, UnRegister)
 app.use('/UserReg', verifyJWT, UserReg)
+app.use('/getAttendance', verifyJWT, getAttendace)
 
 
 app.listen(PORT, () => {

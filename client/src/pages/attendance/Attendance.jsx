@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 // imports start here 
 import SideBar from '../../components/home/sidebar/SideBar'
@@ -9,7 +10,7 @@ import useAuth from '../../hooks/UseAuth'
 
 
 function Attendance() {
-    const { auth } = useAuth();
+     
   return (
     <div className="HomeComponent">
       <div className="HomeComponent-in">
@@ -24,24 +25,45 @@ function Attendance() {
           </div>
           <div className="AttComponent-view">
             <div className="AttComponent-view-in">
-                 <table>
-                    <thead>
-                        <tr>
-                            <th>SI.NO</th>
-                            <th>Event Name</th>
-                            <th>Event Data</th>
-                            <th>Attended</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                        </tr>
-                    </tbody>
-                 </table>
+                <div className="Att-select">
+                  <div className="Att-select-in">
+                      <select name="year" id="year-select">
+                          <option value="2021">2023-24</option>
+                          <option value="2020">2022-23</option>
+                          <option value="2020">2021-22</option>
+                          <option value="2020">2020-21</option>
+                          <option value="2020">2019-20</option>
+                          <option value="2020">2018-19</option>
+                      </select>
+
+                      <select name="sem" id="sem-select">
+                          <option value="">Even Sem</option>
+                          <option value="">Odd Sem</option>
+                      </select>
+
+                      <button className='att-btn'>Submit</button>
+                  </div>
+                </div>
+                   <div className="Att-table">
+                      <table>
+                        <thead>
+                            <tr>
+                                <th>SI.NO</th>
+                                <th>Event Name</th>
+                                <th>Event Data</th>
+                                <th>Attended</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   </div>
             </div>
           </div>
         </div>

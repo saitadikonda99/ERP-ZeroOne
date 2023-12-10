@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import { Navigate } from 'react-router-dom'
 import useAuth from './hooks/UseAuth'
 
 
@@ -18,7 +17,6 @@ import Reset from './pages/Auth/reset/Reset'
 import Request from './pages/Auth/request/Request'
 import UnAuth from './pages/Auth/unAuth/unAuth'
 import Attendance from './pages/attendance/attendance'
-import Select from './pages/attendance/Select'
 
 // admin imports
 
@@ -46,8 +44,7 @@ function App() {
                 <Route path="/events" element={<Events />} />
                 <Route path="/Registration" element={<Registration />} />
                 <Route path="/EventDes/:id" element={<EventDes />} />
-                <Route path="/select" element={<Select/>}/>
-                <Route path='/attendance/:year' element={<Attendance/>}/>
+                <Route path='/attendance' element={<Attendance/>}/>
               </Route>
           
           {/* require Admin authentication */}
