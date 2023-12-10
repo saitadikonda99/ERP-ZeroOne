@@ -18,7 +18,7 @@ pool.getConnection()
             connection.release()
         })
         .catch(error => {
-            console.log('Error connecting to database')
+            console.log(error.message)
         })
 
 module.exports = {
