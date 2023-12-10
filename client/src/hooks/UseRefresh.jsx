@@ -6,7 +6,7 @@ const useRefresh = () => {
 
 
     const refresh = async () => {
-        const response = await axios.get('http://localhost:3001/refresh', {
+        const response = await axios.get('http://16.16.219.18:3001/refresh', {
             withCredentials: true
         });
         

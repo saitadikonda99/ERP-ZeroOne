@@ -25,7 +25,7 @@ function Reset() {
 
       try {
 
-        const response = await axios.post(`http://localhost:3001/reset/${resetToken}`,
+        const response = await axios.post(`http://16.16.219.18:3001/reset/${resetToken}`,
           JSON.stringify({password: reset.password}),
           {
             headers: {

@@ -16,7 +16,7 @@ function Request() {
 
         try {
             console.log(email)
-            const response = await axios.post('http://localhost:3001/forgot',
+            const response = await axios.post('http://16.16.219.18:3001/forgot',
                 JSON.stringify(email),
                 {
                     headers: {

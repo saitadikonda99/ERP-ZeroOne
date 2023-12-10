@@ -19,7 +19,7 @@ function Forgot() {
 
         try {
             console.log(formData)
-            const response = await axios.post('http://localhost:3001/forgot',
+            const response = await axios.post('http://16.16.219.18:3001/forgot',
                 JSON.stringify(formData),
                 {
                     headers: {
