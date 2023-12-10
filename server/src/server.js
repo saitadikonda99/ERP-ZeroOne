@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 const app = express()
-const PORT = 80
+const PORT = 3001
 
 // imports start here
 const Login = require('./routes/auth/loginRoute')
