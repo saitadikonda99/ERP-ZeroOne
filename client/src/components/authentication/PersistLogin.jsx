@@ -18,7 +18,7 @@ const PersistLogin = () => {
             try {
                 await refresh();
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching data:", error.message);
             } finally {
                 setLoading(false);
             }
