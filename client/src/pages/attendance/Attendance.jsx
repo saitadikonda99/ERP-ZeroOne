@@ -6,8 +6,6 @@ import SideBar from '../../components/home/sidebar/SideBar'
 import '../css/Home.css'
 import './Attendance.css'
 import TopBar from '../../components/home/topbar/TopBar'
-import useAuth from '../../hooks/UseAuth'
-
 
 function Attendance() {
      

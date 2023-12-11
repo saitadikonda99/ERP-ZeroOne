@@ -15,7 +15,7 @@ import EventDes from './pages/events/EventDes'
 import Forgot from './pages/Auth/forgot/Forgot'
 import Reset from './pages/Auth/reset/Reset'
 import Request from './pages/Auth/request/Request'
-import Attendance from './pages/attendance/attendance'
+import Attendance from './pages/attendance/Attendance'
 import UnAuth from './pages/Auth/unAuth/UnAuth'
 
 // admin imports
