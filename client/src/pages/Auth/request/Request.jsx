@@ -8,6 +8,7 @@ import './Request.css'
 function Request() {
 
     const { encryptedEmail } = useParams();
+    const host = import.meta.env.VITE_HOST
     const bytes  = CryptoJS.AES.decrypt(encryptedEmail, 'sai');
     const email = bytes.toString(CryptoJS.enc.Utf8);
 
@@ -16,7 +17,7 @@ function Request() {
 
         try {
             console.log(email)
-            const response = await axios.post('http://localhost:3001/forgot',
+            const response = await axios.post(`${host}/forgot`,
                 JSON.stringify(email),
                 {
                     headers: {

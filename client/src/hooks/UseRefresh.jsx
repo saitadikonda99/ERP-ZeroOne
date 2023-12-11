@@ -6,7 +6,8 @@ const useRefresh = () => {
 
 
     const refresh = async () => {
-        const response = await axios.get('http://localhost:3001/refresh', {
+        const host = import.meta.env.VITE_HOST
+        const response = await axios.get( `${host}/refresh`, {
             withCredentials: true
         });
         

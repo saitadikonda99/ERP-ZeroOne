@@ -8,6 +8,7 @@ import './Login.css'
 
 function Login() {
     const { auth, setAuth } = useAuth()
+    const host = import.meta.env.VITE_HOST
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from || "/";
@@ -32,7 +33,7 @@ function Login() {
         e.preventDefault();
     
         try {
-            const response = await axios.post('http://localhost:3001/login',
+            const response = await axios.post(`${host}/login`,
               JSON.stringify(formData),
               {
                 headers: {

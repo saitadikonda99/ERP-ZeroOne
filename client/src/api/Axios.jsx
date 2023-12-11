@@ -1,13 +1,12 @@
 import axios from 'axios'
-const base_URL = 'http://localhost:3001'
-
+const host = import.meta.env.VITE_HOST
 
 export const Axios = axios.create({
-    baseURL: base_URL,
+    baseURL: host,
 })
 
 const axiosPrivate = axios.create({
-    baseURL: base_URL,
+    baseURL: host,
     headers: {
         'Content-Type': 'application/json',
     },

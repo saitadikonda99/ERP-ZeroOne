@@ -15,6 +15,7 @@ function Reset() {
     const resetToken = pathSegments[1];
 
     const [reset, setReset] = useState({ password: '' })
+    const host = import.meta.env.VITE_HOST
     
     const handleChange = (e) => {
         setReset({ ...reset, [e.target.name]: e.target.value })
@@ -25,7 +26,7 @@ function Reset() {
 
       try {
 
-        const response = await axios.post(`http://localhost:3001/reset/${resetToken}`,
+        const response = await axios.post(`${host}/reset/${resetToken}`,
           JSON.stringify({password: reset.password}),
           {
             headers: {
