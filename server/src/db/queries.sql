@@ -1,13 +1,13 @@
 
 -- user table
 INSERT INTO users (username, email, password, role, refresh_token) VALUES
-('sai', 'sai@gmail.com', 'sai@1234', 'Admin', 'null')
+('sai', 'saitadikonda.cse@gmail.com', 'sai@1234', 'Admin', 'null')
 
 INSERT INTO users (username, email, password, role, refresh_token) VALUES
-('deepak', 'deepak@gmail.com', 'deepak', 'Admin', 'null')
+('deepak', 'deepak@gmail.com', 'deepak', 'Student', 'null')
 
 INSERT INTO users (username, email, password, role, refresh_token) VALUES
-('pavan', 'pavan@gmail.com', 'pavan', 'Admin', 'null')
+('pavan', 'pavan@gmail.com', 'pavan', 'Organizer', 'null')
 
 
 -- user academic details
@@ -58,3 +58,14 @@ Where event_id > 5;
 INSERT INTO attendance(academic_year_name, academic_sem, event_id, user_id, status,  ) values (
     '2023-24','even', 5, 5, 'present'
 )
+
+INSERT INTO projects (academic_year_name, academic_sem, project_name, project_description, project_deadline, project_status)
+VALUES
+    ('2023', 'even', 'Continuous Integration with Jenkins', 'Implement CI using Jenkins for automated testing', '2023-05-15', 'In Progress'),
+    ('2023', 'even', 'Infrastructure as Code with Terraform', 'Automate infrastructure deployment with Terraform', '2023-08-20', 'Planning'),
+    ('2023', 'even', 'Container Orchestration with Kubernetes', 'Implement container orchestration using Kubernetes', '2023-12-10', 'Not Started');
+
+
+
+alter table user_projects 
+add column enroll_status VARCHAR(255) NOT NULL DEFAULT 'pending';

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { handleunRegister } = require('../model/unRegisterModel');   
+const { handleunRegister } = require('../../model/events/eventUnreg.Model');   
 
 
 router.delete('/:eventId/:userId', async (req, res) => {

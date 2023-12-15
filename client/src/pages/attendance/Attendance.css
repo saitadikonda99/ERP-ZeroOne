@@ -85,3 +85,7 @@
 .AttComponent-view-in td:nth-child(1) {
     background-color: rgb(225, 224, 231);
 }
+
+#att-hide {
+    display: none;
+}

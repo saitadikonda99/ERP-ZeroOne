@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS projects (
     project_description VARCHAR(255) NOT NULL,
     project_deadline DATE NOT NULL,
     project_status VARCHAR(255) NOT NULL,
+    project_link VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (project_id)
 );
@@ -115,6 +116,29 @@ CREATE TABLE IF NOT EXISTS project_members (
     PRIMARY KEY (project_member_id),
     FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Create a table named user_project_enroll_requests
+CREATE TABLE IF NOT EXISTS user_project_enroll_requests (
+    enroll_request_id INT(11) NOT NULL AUTO_INCREMENT,
+    project_id INT(11) NOT NULL,
+    user_id INT(11) NOT NULL,
+    enroll_status VARCHAR(255) NOT NULL DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (enroll_request_id),
+    FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- create a table user projects 
+CREATE TABLE IF NOT EXISTS user_projects (
+    user_project_id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    project_id INT(11) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_project_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE
 );
 
 -- Create a table named assignments

@@ -7,6 +7,7 @@ const useRefresh = () => {
 
     const refresh = async () => {
         const host = import.meta.env.VITE_HOST
+        console.log(host)
         const response = await axios.get( `${host}/refresh`, {
             withCredentials: true
         });

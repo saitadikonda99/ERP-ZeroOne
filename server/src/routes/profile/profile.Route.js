@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const { handleEveReg } = require('../model/userRegModel')
+const { handleProfile } = require('../../model/profile/profile.Model')
 
 router.get('/:userId', async (req, res) => {
     const userId = req.params.userId
-    const response = await handleEveReg(userId)
+    const response = await handleProfile(userId, res)
     res.send(response)
 })
 

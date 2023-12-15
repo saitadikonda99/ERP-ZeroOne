@@ -1,4 +1,4 @@
-const { pool } = require('../config/db')
+const { pool } = require('../../config/db')
 
 const handleEveReg = async (userId) => {
     try {
@@ -20,3 +20,5 @@ const handleEveReg = async (userId) => {
 module.exports = {
     handleEveReg
 }
+
+

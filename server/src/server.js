@@ -6,21 +6,38 @@ const app = express()
 const PORT = 3001
 
 // imports start here
-const Login = require('./routes/auth/loginRoute')
-const Refresh = require('./routes/auth/refreshRoute')
-const Logout = require('./routes/auth/logoutRoute')
+
+// middleware
 const verifyJWT = require('./middleware/verifyJWT')
 const verifyRoles = require('./middleware/verifyRoles')
 const credentials = require('./middleware/credentials')
 const corsOptions = require('./config/corsOptions')
-const Profile = require('./routes/profileRoute')
-const Events = require('./routes/eventRoute')
-const EventRegister = require('./routes/eventRegRoute')
-const UserReg = require('./routes/userReg')
-const Forgot = require('./routes/auth/forgotRoute.js')
-const Reset = require('./routes/auth/resetRoute.js')
-const UnRegister = require('./routes/unRegisterRoute')
-const getAttendace = require('./routes/getAttRoute')
+
+// auth routes
+const Login = require('./routes/auth/login.Route')
+const Refresh = require('./routes/auth/refresh.Route')
+const Logout = require('./routes/auth/logout.Route')
+const Forgot = require('./routes/auth/forgot.Route')
+const Reset = require('./routes/auth/reset.Route')
+
+// event routes
+
+const Events = require('./routes/events/event.Route')
+const EventRegister = require('./routes/events/eventReg.Route')
+const UnRegister = require('./routes/events/eventUnreg.Route')
+const UserReg = require('./routes/events/userReg.Route')
+
+// profile routes
+const Profile = require('./routes/profile/profile.Route')
+
+// attendance routes
+const getAttendace = require('./routes/attendance/attendance.Route')
+
+// projects routes
+const getProjects = require('./routes/projects/project.Route')
+const Projects = require('./routes/projects/userPro.Route')
+
+
 
 
 // cors 
@@ -53,7 +70,13 @@ app.use('/eventRegister', verifyJWT, EventRegister)
 app.use('/unRegister', verifyJWT, UnRegister)
 app.use('/UserReg', verifyJWT, UserReg)
 app.use('/getAttendance', verifyJWT, getAttendace)
+app.use('/getProjects', verifyJWT, getProjects)
+app.use('/Projects', verifyJWT, Projects)
 
+
+app.get('/', (req, res) => {
+    res.send(`<h1 style="text-align:center">Server running</h1>`);
+})
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

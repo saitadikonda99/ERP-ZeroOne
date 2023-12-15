@@ -62,9 +62,7 @@ function Login() {
 
         } catch (error) { 
             setError(error?.message);
-        } finally {
-            setIsLoading(false);
-        }
+        }  
     };
 
     const handleToast = () => {
@@ -83,9 +81,6 @@ function Login() {
             draggable: true,
             });
     }
-
-
-
 
   return (
    

@@ -1,10 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const { handleProfile } = require('../model/profileModel')
+const { handleProModel } = require('../../model/projects/Project.Model')
+
+
 
 router.get('/:userId', async (req, res) => {
+
     const userId = req.params.userId
-    const response = await handleProfile(userId, res)
+    const response = await handleProModel(userId)
     res.send(response)
 })
 

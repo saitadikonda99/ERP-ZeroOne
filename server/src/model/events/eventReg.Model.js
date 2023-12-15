@@ -1,4 +1,4 @@
-const { pool } = require('../config/db');
+const { pool } = require('../../config/db')
 
 const handleEventRegister = async (user_id, event_id) => {
     try {

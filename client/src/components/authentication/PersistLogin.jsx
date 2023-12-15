@@ -16,7 +16,7 @@ const PersistLogin = () => {
     useEffect(() => {
         const verifyRefreshToken = async () => {
             try {
-                await refresh();
+                await refresh()
             } catch (error) {
                 console.error("Error fetching data:", error.message);
             } finally {

@@ -17,6 +17,8 @@ import Reset from './pages/Auth/reset/Reset'
 import Request from './pages/Auth/request/Request'
 import Attendance from './pages/attendance/Attendance'
 import UnAuth from './pages/Auth/unAuth/UnAuth'
+import Project from './pages/projects/Project'
+import Enroll from './pages/projects/Enroll'
 
 // admin imports
 
@@ -43,6 +45,8 @@ function App() {
                 <Route path="/Registration" element={<Registration />} />
                 <Route path="/EventDes/:id" element={<EventDes />} />
                 <Route path='/attendance' element={<Attendance/>}/>
+                <Route path='/projects' element={<Project/>}/>
+                <Route path='/enroll-project' element={<Enroll/>}/>
               </Route>
           
           {/* require Admin authentication */}
